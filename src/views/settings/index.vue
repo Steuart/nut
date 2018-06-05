@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">控制面板</div>
+    <div class="dashboard-text">系统设置</div>
   </div>
 </template>
 

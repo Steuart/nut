@@ -29,45 +29,79 @@ export const constantRouterMap = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
+    name: '控制面板',
     hidden: true,
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index')
     }]
   },
-
   {
-    path: '/example',
+    path: '/dashboard',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'dashboard',
+        name: '控制面板',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '控制面板', icon: 'dashboard' }
       }
     ]
   },
-
   {
-    path: '/form',
+    path: '/article',
+    component: Layout,
+    redirect: '/article/list',
+    name: '文章管理',
+    meta: { title: '文章管理', icon: 'attachment' },
+    children: [
+      {
+        path: 'list',
+        name: '文章列表',
+        component: () => import('@/views/article/articleList'),
+        meta: { title: '文章列表', icon: 'nav-list' }
+      },
+      {
+        path: 'write',
+        name: '写文章',
+        component: () => import('@/views/article/writeArticle'),
+        meta: { title: '写文章', icon: 'edit' }
+      }
+    ]
+  },
+  {
+    path: '/user',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
+        path: 'list',
+        name: '用户管理',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '用户管理', icon: 'account' }
+      }
+    ]
+  },
+  {
+    path: '/comment',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: '评论管理',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '评论管理', icon: 'comments' }
+      }
+    ]
+  },
+  {
+    path: '/setting',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: '系统设置',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '系统设置', icon: 'set' }
       }
     ]
   },
