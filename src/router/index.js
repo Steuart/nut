@@ -76,8 +76,8 @@ export const constantRouterMap = [
       {
         path: 'list',
         name: '用户管理',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '用户管理', icon: 'account' }
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户管理', icon: 'user' }
       }
     ]
   },
@@ -88,7 +88,7 @@ export const constantRouterMap = [
       {
         path: 'list',
         name: '评论管理',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/comment/index'),
         meta: { title: '评论管理', icon: 'comments' }
       }
     ]
@@ -102,6 +102,18 @@ export const constantRouterMap = [
         name: '系统设置',
         component: () => import('@/views/form/index'),
         meta: { title: '系统设置', icon: 'set' }
+      }
+    ]
+  },
+  {
+    path: '/account',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: '账号设置',
+        component: () => import('@/views/account/index'),
+        meta: { title: '账号设置', icon: 'account' }
       }
     ]
   },

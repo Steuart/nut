@@ -4,7 +4,7 @@
     <vue-showdown :markdown="content" class="show-content"/>
 
     <el-button class="settings" type="info" @click="dialogFormVisible = true" icon="el-icon-setting" circle></el-button>
-    <el-dialog class="setting-content" :visible.sync="dialogFormVisible" width="50%">
+    <el-dialog title="文章设置" center="true" class="setting-content" :visible.sync="dialogFormVisible" width="50%">
       <el-form label-position='right' label-width="80px">
         <el-form-item label="标题">
           <el-input ></el-input>
@@ -68,7 +68,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VueShowdown from 'vue-showdown'
+import { VueShowdown } from 'vue-showdown'
+import { getArticle } from '@/api/article'
+
 export default {
   name: 'dashboard',
   components: {
@@ -85,6 +87,9 @@ export default {
       inputValue: ''
     }
   },
+  created() {
+    this.getArticle('12211221')
+  },
   methods: {
     handleRemove(file, fileList) {
       console.log(file, fileList)
@@ -96,7 +101,11 @@ export default {
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
     },
-
+    getArticle(id) {
+      getArticle(id).then(response => {
+        this.content = response.data.content
+      })
+    },
     showInput() {
       this.inputVisible = true
       this.$nextTick(_ => {
