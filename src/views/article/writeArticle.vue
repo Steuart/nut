@@ -1,10 +1,10 @@
 <template>
   <div class="write-article">
     <textarea v-model="content" class="write-area"></textarea>
-    <vue-showdown :markdown="content" class="show-content"/>
+    <vue-showdown :markdown="content" class="show-content"></vue-showdown>
 
     <el-button class="settings" type="info" @click="dialogFormVisible = true" icon="el-icon-setting" circle></el-button>
-    <el-dialog title="文章设置" center="true" class="setting-content" :visible.sync="dialogFormVisible" width="50%">
+    <el-dialog title="文章设置" center class="setting-content" :visible.sync="dialogFormVisible" width="50%">
       <el-form label-position='right' label-width="80px">
         <el-form-item label="标题">
           <el-input ></el-input>
@@ -68,7 +68,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { VueShowdown } from 'vue-showdown'
+import VueShowdown from 'vue-showdown'
 import { getArticle } from '@/api/article'
 
 export default {
