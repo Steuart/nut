@@ -70,7 +70,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import VueShowdown from 'vue-showdown'
-import { getArticle,saveArticle } from '@/api/article'
+import { getArticle, saveArticle } from '@/api/article'
 
 export default {
   name: 'dashboard',
@@ -133,7 +133,9 @@ export default {
     },
     saveArticle() {
       this.dialogFormVisible = false
-      saveArticle(this.article).then(response => {
+      // const article = JSON.stringify(this.article)
+      const article = this.article
+      saveArticle(article).then(response => {
         this.article.id = response.data.id
       })
     }

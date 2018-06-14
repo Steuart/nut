@@ -11,6 +11,7 @@ export function getArticle(id) {
 export function saveArticle(article) {
   return request({
     url: '/article/',
-    method: 'post'
+    method: 'post',
+    data: article
   })
 }
