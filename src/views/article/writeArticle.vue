@@ -15,7 +15,7 @@
               <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col class="line" :span="2">-</el-col>
+          <el-col class="line" :span="2" align="center">-</el-col>
           <el-col :span="11">
             <el-form-item prop="date2">
               <el-time-picker type="fixed-time" placeholder="选择时间" style="width: 100%;"></el-time-picker>
@@ -40,7 +40,7 @@
         <el-form-item label="标签">
           <el-tag
             :key="tag"
-            v-for="tag in dynamicTags"
+            v-for="tag in article.tags"
             closable
             :disable-transitions="false"
             @close="handleClose(tag)">
@@ -56,11 +56,12 @@
             @blur="handleInputConfirm"
           >
           </el-input>
-          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加</el-button>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">保存</el-button>
+      <div slot="footer" class="dialog-footer" align="right">
+        <el-button type="normal" @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="saveArticle">保存</el-button>
       </div>
     </el-dialog>
   </div>
@@ -69,7 +70,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import VueShowdown from 'vue-showdown'
-import { getArticle } from '@/api/article'
+import { getArticle,saveArticle } from '@/api/article'
 
 export default {
   name: 'dashboard',
@@ -82,9 +83,19 @@ export default {
       dialogFormVisible: false,
       dialogImageUrl: '',
       dialogVisible: false,
-      dynamicTags: ['标签一', '标签二', '标签三'],
       inputVisible: false,
-      inputValue: ''
+      inputValue: '',
+      article: {
+        id: '',
+        markdown: '',
+        html: '',
+        coverImg: '',
+        title: '',
+        createDate: '',
+        summary: '',
+        tags: ['标签一', '标签二', '标签三'],
+        classify: ''
+      }
     }
   },
   created() {
@@ -112,7 +123,6 @@ export default {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-
     handleInputConfirm() {
       const inputValue = this.inputValue
       if (inputValue) {
@@ -120,6 +130,12 @@ export default {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    saveArticle() {
+      this.dialogFormVisible = false
+      saveArticle(this.article).then(response => {
+        this.article.id = response.data.id
+      })
     }
   },
   computed: {
